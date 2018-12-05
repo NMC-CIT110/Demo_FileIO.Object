@@ -16,7 +16,7 @@ namespace Demo_FileIO
             //
             // debug: save seed data to the data file
             //
-            SeedDataFile(dataPath);
+            //SeedDataFile(dataPath);
 
             DisplayOpeningScreen();
             DisplayMenu(dataPath);
@@ -35,7 +35,7 @@ namespace Demo_FileIO
             //
             // debug: initialize the character list with character objects
             //
-            //characters = InitializeListOfCharacters();
+            characters = InitializeListOfCharacters();
 
             while (!exiting)
             {
@@ -255,35 +255,32 @@ namespace Demo_FileIO
         /// <returns>list of characters</returns>
         static List<Character> InitializeListOfCharacters()
         {
-            List<Character> CharacterList = new List<Character>()
-            {
-                new Character()
-                {
-                    Id = 1,
-                    LastName = "Flintstone",
-                    FirstName = "Fred",
-                    Address = "301 Cobblestone Way",
-                    City = "Bedrock",
-                    State = "MI",
-                    Zip = "70777",
-                    Age = 28,
-                    Gender = Character.GenderType.MALE
-                },
-                new Character()
-                {
-                    Id = 2,
-                    LastName = "Rubble",
-                    FirstName = "Barney",
-                    Address = "303 Cobblestone Way",
-                    City = "Bedrock",
-                    State = "MI",
-                    Zip = "70777",
-                    Age = 28,
-                    Gender = Character.GenderType.FEMALE
-                }
-            };
+            List<Character> characters = new List<Character>();
+            Character tempCharacter = new Character();
 
-            return CharacterList;
+            tempCharacter.Id = 1;
+            tempCharacter.LastName = "Flintstone";
+            tempCharacter.FirstName = "Fred";
+            tempCharacter.Address = "301 Cobblestone Way";
+            tempCharacter.City = "Bedrock";
+            tempCharacter.State = "MI";
+            tempCharacter.Zip = "70777";
+            tempCharacter.Age = 28;
+            tempCharacter.Gender = Character.GenderType.MALE;
+            characters.Add(tempCharacter);
+
+            tempCharacter.Id = 2;
+            tempCharacter.LastName = "Rubble";
+            tempCharacter.FirstName = "Barney";
+            tempCharacter.Address = "303 Cobblestone Way";
+            tempCharacter.City = "Bedrock";
+            tempCharacter.State = "MI";
+            tempCharacter.Zip = "70777";
+            tempCharacter.Age = 28;
+            tempCharacter.Gender = Character.GenderType.FEMALE;
+            characters.Add(tempCharacter);
+
+            return characters;
         }
 
         /// <summary>
@@ -358,16 +355,16 @@ namespace Demo_FileIO
         {
             const char delineator = ',';
 
-            List<string> CharacterStringList = new List<string>();
-
-            List<Character> CharacterClassList = new List<Character>();
+            List<string> characterStringList = new List<string>();
+            List<Character> characterClassList = new List<Character>();
+            Character tempCharacter = new Character();
 
             //
             // read each line and put it into an array and convert the array to a list
             //
             try
             {
-                CharacterStringList = File.ReadAllLines(dataFile).ToList();
+                characterStringList = File.ReadAllLines(dataFile).ToList();
             }
             catch (Exception) // throw any exception up to the calling method
             {
@@ -377,27 +374,25 @@ namespace Demo_FileIO
             //
             // create character object for each line of data read and fill in the property values
             //
-            foreach (string characterString in CharacterStringList)
+            foreach (string characterString in characterStringList)
             {
                 // use the Split method and the delineator on the array to separate each property into an array of properties
                 string[] properties = characterString.Split(delineator);
 
-                CharacterClassList.Add(
-                    new Character()
-                    {
-                        Id = Convert.ToInt32(properties[0]),
-                        LastName = properties[1],
-                        FirstName = properties[2],
-                        Address = properties[3],
-                        City = properties[4],
-                        State = properties[5],
-                        Zip = properties[6],
-                        Age = Convert.ToInt32(properties[7]),
-                        Gender = (Character.GenderType)Enum.Parse(typeof(Character.GenderType), properties[8])
-                    });
+                tempCharacter.Id = Convert.ToInt32(properties[0]);
+                tempCharacter.LastName = properties[1];
+                tempCharacter.FirstName = properties[2];
+                tempCharacter.Address = properties[3];
+                tempCharacter.City = properties[4];
+                tempCharacter.State = properties[5];
+                tempCharacter.Zip = properties[6];
+                tempCharacter.Age = Convert.ToInt32(properties[7]);
+                tempCharacter.Gender = (Character.GenderType)Enum.Parse(typeof(Character.GenderType), properties[8]);
+
+                characterClassList.Add(tempCharacter);
             }
 
-            return CharacterClassList;
+            return characterClassList;
         }
 
         #region HELPER METHODS
