@@ -173,11 +173,11 @@ namespace Demo_FileIO
             try
             {
                 WriteCharactersToCsvFile(dataPath, characters);
-                Console.WriteLine("The characters were successfully saved to the file.");
+                Console.WriteLine("\tThe characters were successfully saved to the file.");
             }
             catch (Exception e)// catch any exception thrown by the write method
             {
-                Console.WriteLine("The following error occurred when writing to the file.");
+                Console.WriteLine("\tThe following error occurred when writing to the file.");
                 Console.WriteLine(e.Message);
             }
 
@@ -205,11 +205,11 @@ namespace Demo_FileIO
             try
             {
                 characters = ReadCharactersFromCsvFile(dataPath);
-                Console.WriteLine("The characters were successfully loaded from the file.");
+                Console.WriteLine("/tThe characters were successfully loaded from the file.");
             }
             catch (Exception e) // catch any exception thrown by the read method
             {
-                Console.WriteLine("The following error occurred when reading from the file.");
+                Console.WriteLine("/tThe following error occurred when reading from the file.");
                 Console.WriteLine(e.Message);
             }
 
@@ -235,7 +235,7 @@ namespace Demo_FileIO
             }
             else
             {
-                Console.WriteLine("There are currently no characters available.");
+                Console.WriteLine("\tThere are currently no characters available.");
             }
 
             DisplayContinuePrompt();
@@ -256,29 +256,30 @@ namespace Demo_FileIO
         static List<Character> InitializeListOfCharacters()
         {
             List<Character> characters = new List<Character>();
-            Character tempCharacter = new Character();
 
-            tempCharacter.Id = 1;
-            tempCharacter.LastName = "Flintstone";
-            tempCharacter.FirstName = "Fred";
-            tempCharacter.Address = "301 Cobblestone Way";
-            tempCharacter.City = "Bedrock";
-            tempCharacter.State = "MI";
-            tempCharacter.Zip = "70777";
-            tempCharacter.Age = 28;
-            tempCharacter.Gender = Character.GenderType.MALE;
-            characters.Add(tempCharacter);
+            Character character1 = new Character();
+            character1.Id = 1;
+            character1.LastName = "Flintstone";
+            character1.FirstName = "Fred";
+            character1.Address = "301 Cobblestone Way";
+            character1.City = "Bedrock";
+            character1.State = "MI";
+            character1.Zip = "70777";
+            character1.Age = 28;
+            character1.Gender = Character.GenderType.MALE;
+            characters.Add(character1);
 
-            tempCharacter.Id = 2;
-            tempCharacter.LastName = "Rubble";
-            tempCharacter.FirstName = "Barney";
-            tempCharacter.Address = "303 Cobblestone Way";
-            tempCharacter.City = "Bedrock";
-            tempCharacter.State = "MI";
-            tempCharacter.Zip = "70777";
-            tempCharacter.Age = 28;
-            tempCharacter.Gender = Character.GenderType.FEMALE;
-            characters.Add(tempCharacter);
+            Character character2 = new Character();
+            character2.Id = 2;
+            character2.LastName = "Rubble";
+            character2.FirstName = "Barney";
+            character2.Address = "303 Cobblestone Way";
+            character2.City = "Bedrock";
+            character2.State = "MI";
+            character2.Zip = "70777";
+            character2.Age = 28;
+            character2.Gender = Character.GenderType.FEMALE;
+            characters.Add(character2);
 
             return characters;
         }
