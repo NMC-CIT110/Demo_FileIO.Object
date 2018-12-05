@@ -90,24 +90,37 @@ namespace Demo_FileIO
 
         private static void DisplayCharacterInfo(List<Character> characters)
         {
-            throw new NotImplementedException();
+            Console.WriteLine("\t--------------");
+            Console.WriteLine("\tNot Implemented");
+            Console.WriteLine("\t--------------");
         }
 
         private static void DisplayAddCharacter(List<Character> characters)
         {
-            throw new NotImplementedException();
+            Console.WriteLine("\t--------------");
+            Console.WriteLine("\tNot Implemented");
+            Console.WriteLine("\t--------------");
         }
 
         private static void DisplayDeleteCharacter(List<Character> characters)
         {
-            throw new NotImplementedException();
+            Console.WriteLine("\t--------------");
+            Console.WriteLine("\tNot Implemented");
+            Console.WriteLine("\t--------------");
         }
 
         private static void DisplayEditCharacter(List<Character> characters)
         {
-            throw new NotImplementedException();
+            Console.WriteLine("\t--------------");
+            Console.WriteLine("\tNot Implemented");
+            Console.WriteLine("\t--------------");
         }
 
+        /// <summary>
+        /// save character list to the data file
+        /// </summary>
+        /// <param name="dataPath">data path</param>
+        /// <param name="characters">list of characters</param>
         private static void DisplaySaveCharactersToFile(string dataPath, List<Character> characters)
         {
             DisplayHeader("Save Characters to File");
@@ -117,14 +130,14 @@ namespace Demo_FileIO
             Console.ReadKey();
 
             //
-            // catch all exceptions thrown by the write data method and display a message
+            // try to write the list of characters to the file
             //
             try
             {
                 WriteCharactersToCsvFile(dataPath, characters);
                 Console.WriteLine("The characters were successfully saved to the file.");
             }
-            catch (Exception e)
+            catch (Exception e)// catch any exception thrown by the write method
             {
                 Console.WriteLine("The following error occurred when writing to the file.");
                 Console.WriteLine(e.Message);
@@ -133,6 +146,11 @@ namespace Demo_FileIO
             DisplayContinuePrompt();
         }
 
+        /// <summary>
+        /// load character list from data file
+        /// </summary>
+        /// <param name="dataPath">data path</param>
+        /// <returns>list of characters</returns>
         private static List<Character> DisplayLoadCharactersFromFile(string dataPath)
         {
             List<Character> characters = new List<Character>();
@@ -144,14 +162,14 @@ namespace Demo_FileIO
             Console.ReadKey();
 
             //
-            // catch all exceptions thrown by the read data method and display a message
+            // try to read the characters from the data file into a list
             //
             try
             {
                 characters = ReadCharactersFromCsvFile(dataPath);
                 Console.WriteLine("The characters were successfully loaded from the file.");
             }
-            catch (Exception e)
+            catch (Exception e) // catch any exception thrown by the read method
             {
                 Console.WriteLine("The following error occurred when reading from the file.");
                 Console.WriteLine(e.Message);
@@ -219,22 +237,19 @@ namespace Demo_FileIO
         /// display all character properties
         /// </summary>
         /// <param name="characters">character object</param>
-        static void DisplayCharacters(List<Character> characters)
+        static void DisplayCharacterDetail(Character character)
         {
-            foreach (Character character in characters)
-            {
                 Console.WriteLine();
-                Console.WriteLine($"Id: {character.Id}");
-                Console.WriteLine($"Last Name: {character.LastName}");
-                Console.WriteLine($"First Name: {character.FirstName}");
-                Console.WriteLine($"Address: {character.Address}");
-                Console.WriteLine($"City: {character.City}");
-                Console.WriteLine($"State: {character.State}");
-                Console.WriteLine($"Zip: {character.Zip}");
-                Console.WriteLine($"Age: {character.Age}");
-                Console.WriteLine($"Gender: {character.Gender}");
+                Console.WriteLine($"\tId: {character.Id}");
+                Console.WriteLine($"\tLast Name: {character.LastName}");
+                Console.WriteLine($"\tFirst Name: {character.FirstName}");
+                Console.WriteLine($"\tAddress: {character.Address}");
+                Console.WriteLine($"\tCity: {character.City}");
+                Console.WriteLine($"\tState: {character.State}");
+                Console.WriteLine($"\tZip: {character.Zip}");
+                Console.WriteLine($"\tAge: {character.Age}");
+                Console.WriteLine($"\tGender: {character.Gender}");
                 Console.WriteLine();
-            }
         }
 
         /// <summary>
@@ -268,13 +283,13 @@ namespace Demo_FileIO
             }
 
             //
-            // catch all errors when writing to the file and pass the exception to the calling method
+            // write the list of strings (characters) to the data file
             //
             try
             {
                 File.WriteAllLines(dataPath, charactersStringListWrite);
             }
-            catch (Exception)
+            catch (Exception) // throw any exception up to the calling method
             {
                 throw;
             }
@@ -297,7 +312,14 @@ namespace Demo_FileIO
             //
             // read each line and put it into an array and convert the array to a list
             //
-            CharacterStringList = File.ReadAllLines(dataFile).ToList();
+            try
+            {
+                CharacterStringList = File.ReadAllLines(dataFile).ToList();
+            }
+            catch (Exception) // throw any exception up to the calling method
+            {
+                throw;
+            }
 
             //
             // create character object for each line of data read and fill in the property values
