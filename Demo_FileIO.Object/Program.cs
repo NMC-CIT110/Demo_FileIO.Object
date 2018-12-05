@@ -11,24 +11,31 @@ namespace Demo_FileIO
     {
         static void Main(string[] args)
         {
-            string textFilePath = @"Data\Data.csv";
+            string dataPath = @"Data\Data.csv";
+
+            //
+            // debug: save seed data to the data file
+            //
+            SeedDataFile(dataPath);
 
             DisplayOpeningScreen();
-            DisplayMenu();
+            DisplayMenu(dataPath);
             DisplayClosingScreen();
         }
 
         /// <summary>
         /// display menu and process user menu choices
         /// </summary>
-        static void DisplayMenu()
+        static void DisplayMenu(string dataPath)
         {
             string menuChoice;
             bool exiting = false;
+            List<Character> characters = null;
 
-            List<Character> characters = InitializeListOfCharacters();
-
-            string dataPath = @"Data\Data.csv";
+            //
+            // debug: initialize the character list with character objects
+            //
+            //characters = InitializeListOfCharacters();
 
             while (!exiting)
             {
@@ -87,33 +94,64 @@ namespace Demo_FileIO
         }
 
 
-
+        /// <summary>
+        /// display all of the properties of a character
+        /// </summary>
+        /// <param name="characters">list of characters</param>
         private static void DisplayCharacterInfo(List<Character> characters)
         {
+            DisplayHeader("Character Information");
+
             Console.WriteLine("\t--------------");
             Console.WriteLine("\tNot Implemented");
             Console.WriteLine("\t--------------");
+
+            DisplayContinuePrompt();
         }
 
+        /// <summary>
+        /// user adds a character
+        /// </summary>
+        /// <param name="characters">list of characters</param>
         private static void DisplayAddCharacter(List<Character> characters)
         {
+            DisplayHeader("Add a Character");
+
             Console.WriteLine("\t--------------");
             Console.WriteLine("\tNot Implemented");
             Console.WriteLine("\t--------------");
+
+            DisplayContinuePrompt();
         }
 
+        /// <summary>
+        /// user deletes a character
+        /// </summary>
+        /// <param name="characters">list of characters</param>
         private static void DisplayDeleteCharacter(List<Character> characters)
         {
+            DisplayHeader("Delete a Character");
+
             Console.WriteLine("\t--------------");
             Console.WriteLine("\tNot Implemented");
             Console.WriteLine("\t--------------");
+
+            DisplayContinuePrompt();
         }
 
+        /// <summary>
+        /// user edits a character
+        /// </summary>
+        /// <param name="characters">list of characters</param>
         private static void DisplayEditCharacter(List<Character> characters)
         {
+            DisplayHeader("Edit a Character");
+
             Console.WriteLine("\t--------------");
             Console.WriteLine("\tNot Implemented");
             Console.WriteLine("\t--------------");
+
+            DisplayContinuePrompt();
         }
 
         /// <summary>
@@ -125,8 +163,8 @@ namespace Demo_FileIO
         {
             DisplayHeader("Save Characters to File");
 
-            Console.WriteLine($"The list of characters will be saved to '{dataPath}'.");
-            Console.WriteLine("Press any key to continue.");
+            Console.WriteLine($"\tThe list of characters will be saved to '{dataPath}'.");
+            Console.WriteLine("\t\tPress any key to continue.");
             Console.ReadKey();
 
             //
@@ -157,8 +195,8 @@ namespace Demo_FileIO
 
             DisplayHeader("Load Characters from File");
 
-            Console.WriteLine($"The list of characters will be loaded from '{dataPath}'.");
-            Console.WriteLine("Press any key to continue.");
+            Console.WriteLine($"\tThe list of characters will be loaded from '{dataPath}'.");
+            Console.WriteLine("\t\tPress any key to continue.");
             Console.ReadKey();
 
             //
@@ -174,7 +212,7 @@ namespace Demo_FileIO
                 Console.WriteLine("The following error occurred when reading from the file.");
                 Console.WriteLine(e.Message);
             }
-            
+
             DisplayContinuePrompt();
 
             return characters;
@@ -188,12 +226,27 @@ namespace Demo_FileIO
         {
             DisplayHeader("All Flintstone Characters");
 
-            foreach (Character character in characters)
+            if (characters != null)
             {
-                Console.WriteLine($"\t{character.FullName()}");
+                foreach (Character character in characters)
+                {
+                    Console.WriteLine($"\t{character.FullName()}");
+                }
+            }
+            else
+            {
+                Console.WriteLine("There are currently no characters available.");
             }
 
             DisplayContinuePrompt();
+        }
+
+        /// <summary>
+        /// load seed data into data file
+        /// </summary>
+        static void SeedDataFile(string dataPath)
+        {
+            WriteCharactersToCsvFile(dataPath, InitializeListOfCharacters());
         }
 
         /// <summary>
@@ -239,17 +292,17 @@ namespace Demo_FileIO
         /// <param name="characters">character object</param>
         static void DisplayCharacterDetail(Character character)
         {
-                Console.WriteLine();
-                Console.WriteLine($"\tId: {character.Id}");
-                Console.WriteLine($"\tLast Name: {character.LastName}");
-                Console.WriteLine($"\tFirst Name: {character.FirstName}");
-                Console.WriteLine($"\tAddress: {character.Address}");
-                Console.WriteLine($"\tCity: {character.City}");
-                Console.WriteLine($"\tState: {character.State}");
-                Console.WriteLine($"\tZip: {character.Zip}");
-                Console.WriteLine($"\tAge: {character.Age}");
-                Console.WriteLine($"\tGender: {character.Gender}");
-                Console.WriteLine();
+            Console.WriteLine();
+            Console.WriteLine($"\tId: {character.Id}");
+            Console.WriteLine($"\tLast Name: {character.LastName}");
+            Console.WriteLine($"\tFirst Name: {character.FirstName}");
+            Console.WriteLine($"\tAddress: {character.Address}");
+            Console.WriteLine($"\tCity: {character.City}");
+            Console.WriteLine($"\tState: {character.State}");
+            Console.WriteLine($"\tZip: {character.Zip}");
+            Console.WriteLine($"\tAge: {character.Age}");
+            Console.WriteLine($"\tGender: {character.Gender}");
+            Console.WriteLine();
         }
 
         /// <summary>
