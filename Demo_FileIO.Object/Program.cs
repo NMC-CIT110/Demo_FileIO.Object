@@ -205,11 +205,11 @@ namespace Demo_FileIO
             try
             {
                 characters = ReadCharactersFromCsvFile(dataPath);
-                Console.WriteLine("/tThe characters were successfully loaded from the file.");
+                Console.WriteLine("\tThe characters were successfully loaded from the file.");
             }
             catch (Exception e) // catch any exception thrown by the read method
             {
-                Console.WriteLine("/tThe following error occurred when reading from the file.");
+                Console.WriteLine("\tThe following error occurred when reading from the file.");
                 Console.WriteLine(e.Message);
             }
 
@@ -377,6 +377,8 @@ namespace Demo_FileIO
             //
             foreach (string characterString in characterStringList)
             {
+                tempCharacter = new Character();
+
                 // use the Split method and the delineator on the array to separate each property into an array of properties
                 string[] properties = characterString.Split(delineator);
 
