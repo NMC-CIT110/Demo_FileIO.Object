@@ -72,7 +72,7 @@ namespace Demo_FileIO
                         break;
 
                     case "e":
-                        DisplayCharacterInfo(characters);
+                        DisplayCharacterDetail(characters);
                         break;
 
                     case "f":
@@ -98,7 +98,7 @@ namespace Demo_FileIO
         /// display all of the properties of a character
         /// </summary>
         /// <param name="characters">list of characters</param>
-        private static void DisplayCharacterInfo(List<Character> characters)
+        private static void DisplayCharacterDetail(List<Character> characters)
         {
             DisplayHeader("Character Information");
 
@@ -312,7 +312,7 @@ namespace Demo_FileIO
         {
             string characterString;
 
-            List<string> charactersStringListWrite = new List<string>();
+            List<string> characterStringList = new List<string>();
 
             //
             // build the list to write to the text file line by line
@@ -330,7 +330,7 @@ namespace Demo_FileIO
                     character.Age + "," +
                     character.Gender;
 
-                charactersStringListWrite.Add(characterString);
+                characterStringList.Add(characterString);
             }
 
             //
@@ -338,7 +338,7 @@ namespace Demo_FileIO
             //
             try
             {
-                File.WriteAllLines(dataPath, charactersStringListWrite);
+                File.WriteAllLines(dataPath, characterStringList);
             }
             catch (Exception) // throw any exception up to the calling method
             {
@@ -357,7 +357,7 @@ namespace Demo_FileIO
             const char delineator = ',';
 
             List<string> characterStringList = new List<string>();
-            List<Character> characterClassList = new List<Character>();
+            List<Character> characterObjectList = new List<Character>();
             Character tempCharacter = new Character();
 
             //
@@ -390,10 +390,10 @@ namespace Demo_FileIO
                 tempCharacter.Age = Convert.ToInt32(properties[7]);
                 tempCharacter.Gender = (Character.GenderType)Enum.Parse(typeof(Character.GenderType), properties[8]);
 
-                characterClassList.Add(tempCharacter);
+                characterObjectList.Add(tempCharacter);
             }
 
-            return characterClassList;
+            return characterObjectList;
         }
 
         #region HELPER METHODS
